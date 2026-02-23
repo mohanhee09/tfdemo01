@@ -1,0 +1,111 @@
+# 작업방법 요약
+sub-az01-og086401-prd-kdp
+ 
+# AKS Cluster 변수
+az account set -s sub-az01-og086401-prd-kdp
+ 
+$RESOURCE_GROUP_NAME="rg-az01-og086401-prd-kdp-01"
+$CLUSTER_NAME="aks-az01-prd-kdp-01"
+ 
+## systempool02 생성
+$RESOURCE_GROUP_NAME="rg-az01-og086401-prd-kdp-01"
+$CLUSTER_NAME="aks-az01-prd-kdp-01"
+ 
+$NODE_POOL_NAME="systempool02"  #✅ name 확인 필수
+$NODE_POOL_MODE="System" # System/User
+$VM_SKU="standard_D4s_v5"  # ✅ SKU 확인 필수
+$OS_SKU="Ubuntu"  # 대부분 Ubuntu / AzureLinux
+$NODE_DISK_TYPE="Managed" # Managed/Ephemeral
+$NODE_DISK_SIZE="128"
+$NODE_COUNT="2"  #확인필요
+$MIN_SIZE="2"
+$MAX_SIZE="2"
+$MAX_PODS="250"
+ 
+az aks nodepool add `
+   --resource-group $RESOURCE_GROUP_NAME `
+   --cluster-name $CLUSTER_NAME `
+   --name $NODE_POOL_NAME `
+   --mode $NODE_POOL_MODE `
+   --node-vm-size $VM_SKU `
+   --node-count $NODE_COUNT `
+   --max-pods $MAX_PODS `
+   --os-sku $OS_SKU `
+   --enable-cluster-autoscaler `
+   --min-count $MIN_SIZE `
+   --max-count $MAX_SIZE `
+   --node-osdisk-type $NODE_DISK_TYPE `
+   --node-osdisk-size $NODE_DISK_SIZE `
+   --enable-encryption-at-host `
+   --zones 1 2 3
+ 
+# node check
+kubectl get nodes -o wide
+NAME                                   STATUS   ROLES    AGE     VERSION   INTERNAL-IP      EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
+aks-systempool01-85093286-vmss000000   Ready    <none>   181d    v1.33.1   10.218.129.134   <none>        Ubuntu 22.04.5 LTS   5.15.0-1091-azure   containerd://1.7.27-1
+aks-systempool01-85093286-vmss000001   Ready    <none>   181d    v1.33.1   10.218.129.135   <none>        Ubuntu 22.04.5 LTS   5.15.0-1091-azure   containerd://1.7.27-1
+aks-systempool02-15703029-vmss000000   Ready    <none>   7m21s   v1.33.1   10.218.129.140   <none>        Ubuntu 22.04.5 LTS   5.15.0-1102-azure   containerd://1.7.30-1
+aks-systempool02-15703029-vmss000001   Ready    <none>   7m21s   v1.33.1   10.218.129.141   <none>        Ubuntu 22.04.5 LTS   5.15.0-1102-azure   containerd://1.7.30-1
+aks-userpool01-33366325-vmss000000     Ready    <none>   181d    v1.33.1   10.218.129.137   <none>        Ubuntu 22.04.5 LTS   5.15.0-1091-azure   containerd://1.7.27-1
+aks-userpool01-33366325-vmss000001     Ready    <none>   181d    v1.33.1   10.218.129.136   <none>        Ubuntu 22.04.5 LTS   5.15.0-1091-azure   containerd://1.7.27-1
+aks-userpool01-33366325-vmss000002     Ready    <none>   146d    v1.33.1   10.218.129.139   <none>        Ubuntu 22.04.5 LTS   5.15.0-1091-azure   containerd://1.7.27-1
+# cordon systempool01 node 2EA
+kubectl cordon aks-systempool01-85093286-vmss000000 aks-systempool01-85093286-vmss000001
+ 
+# 기존 sytstempool01 node drain 0,1
+kubectl drain aks-systempool01-85093286-vmss000000 --ignore-daemonsets --delete-emptydir-data
+kubectl drain aks-systempool01-85093286-vmss000001 --ignore-daemonsets --delete-emptydir-data
+ 
+kubectl get pods -A -o wide | grep aks-systempool01-85093286-vmss000000
+kubectl get pods -A -o wide | grep aks-systempool01-85093286-vmss000001
+ kubectl get pods -A -o wide | grep aks-systempool02-15703029-vmss000000
+# 기존 systempool01 삭제
+Portal -> 설정 -> 노드풀 -> systempool01 삭제  ✅현재 작업 13:40
+ 
+## systempool01 재생성
+$RESOURCE_GROUP_NAME="rg-az01-og086401-prd-kdp-01"
+$CLUSTER_NAME="aks-az01-prd-kdp-01"
+ 
+$NODE_POOL_NAME="systempool01"  #✅ name 확인 필수
+$NODE_POOL_MODE="System" # System/User
+$VM_SKU="standard_D4s_v5"  # ✅ SKU 확인 필수
+$OS_SKU="Ubuntu"  # 대부분 Ubuntu / AzureLinux
+$NODE_DISK_TYPE="Managed" # Managed/Ephemeral
+$NODE_DISK_SIZE="128"
+$NODE_COUNT="2"  #확인필요
+$MIN_SIZE="2"
+$MAX_SIZE="2"
+$MAX_PODS="250"
+ 
+az aks nodepool add `
+   --resource-group $RESOURCE_GROUP_NAME `
+   --cluster-name $CLUSTER_NAME `
+   --name $NODE_POOL_NAME `
+   --mode $NODE_POOL_MODE `
+   --node-vm-size $VM_SKU `
+   --node-count $NODE_COUNT `
+   --max-pods $MAX_PODS `
+   --os-sku $OS_SKU `
+   --enable-cluster-autoscaler `
+   --min-count $MIN_SIZE `
+   --max-count $MAX_SIZE `
+   --node-osdisk-type $NODE_DISK_TYPE `
+   --node-osdisk-size $NODE_DISK_SIZE `
+   --enable-encryption-at-host `
+   --zones 1 2 3
+ 
+# node check
+kubectl get nodes -o wide
+ 
+# cordon systempool01 node 2EA
+kubectl cordon aks-systempool02-15703029-vmss000000 aks-systempool02-15703029-vmss000001
+ 
+# systempool02 drain 0,1
+kubectl drain aks-systempool02-15703029-vmss000000 --ignore-daemonsets --delete-emptydir-data
+kubectl drain aks-systempool02-15703029-vmss000001 --ignore-daemonsets --delete-emptydir-data
+ 
+kubectl get pods -A -o wide | grep aks-systempool02-15703029-vmss000000
+kubectl get pods -A -o wide | grep aks-systempool02-15703029-vmss000001
+ 
+# 기존 systempool02 삭제
+Portal -> 설정 -> 노드풀 -> systempool02 삭제

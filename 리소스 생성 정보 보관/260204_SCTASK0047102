@@ -1,0 +1,42 @@
+AML에서 W&B로 연동하기 위한 워크어라운드용 AppGW를 
+
+[공통사항]1
+설치 구독 : sub-az0-co013701-stg-magma
+
+설치 리소스 그룹 : rg-az01-co013701-stg-magma-wandb-01
+설치 대상 서브넷 : sbn-az01-stg-magma-appgw-private-wandb-01
+
+[설치 형상]
+appgw-az01-stg-magma-private-wandb-01
+- public ip : pip-az01-stg-magma-private-wandb-01
+- private ip : 10.243.235.62
+- firewall policy : wafp01-az01-stg-magma-private-wandb-01
+- private ip 서비스용으로 public ip용 listener 생성 불필요
+
+nsg 생성 필요
+nsg-az01-stg-magma-appgw-private-wandb-01
+
+udr 생성 필요
+udr-az01-stg-magma-appgw-private-wandb-01
+
+uami 생성 필요
+umi-az01-stg-magma-appgw-private-wandb-01
+
+key vault 생성 필요
+kv-az01-stg-magma-wandb1
+===========================================================================
+
+[배포 리소스 이름]
+appgw 이름 : appgw-az01-stg-magma-private-wandb-01
+
+- public ip : pip-az01-stg-magma-private-wandb-01
+- private ip : 10.243.235.62
+- firewall policy : wafp01-az01-stg-magma-private-wandb-01
+- private ip 서비스용으로 public ip용 listener 생성 불필요
+
+
+
+
+
+
+프라이빗엔드포인트 : pep-az01-stg-magma-kv-wandb-01

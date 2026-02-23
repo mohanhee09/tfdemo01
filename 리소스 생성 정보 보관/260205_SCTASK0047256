@@ -1,0 +1,264 @@
+vm-az01-dev-migt-jumpbox-01
+
+기존 ip : 10.241.147.168
+
+vm-az01-dev-migt-jump-01458_z1 (기본) / ipconfig1 (기본)
+vm-az01-dev-migt-jump-01_OsDisk_1_3a2d26b562ac4b79b9d2f9d2099f9ebe
+
+user : migt
+pw : tisdkv36kdt@
+
+================================================================================
+기본 사항
+구독
+sub-az01-ag015703-dev-migt
+리소스 그룹
+rg-az01-ag015703-dev-migt-01
+가상 머신 이름
+vm-az01-dev-migt-jumpbox-01
+지역
+Korea Central
+가용성 옵션
+가용성 영역
+영역 옵션
+자체 선택 영역
+가용성 영역
+1
+보안 유형
+표준
+이미지
+cg_az01_co013601_01/image-jump-251125/latest - Gen2
+VM 아키텍처
+x64
+크기
+Standard D2s v5 (2 vcpu, 8 GiB 메모리)
+최대 절전 모드 사용
+아니요
+인증 형식
+암호
+사용자 이름
+migt
+Azure 스폿
+아니요
+디스크
+OS 디스크 크기
+이미지 기본값
+OS 디스크 유형
+표준 SSD LRS
+관리 디스크 사용
+예
+VM으로 OS 디스크 삭제
+사용 안 함
+임시 OS 디스크
+아니요
+네트워킹
+가상 네트워크
+vnet-az01-dev-migt-01
+서브넷
+sbn-az01-dev-migt-app
+공용 IP
+없음
+NIC 네트워크 보안 그룹
+없음
+가속화된 네트워킹
+끄기
+기존 부하 분산 솔루션 뒤에 이 가상 머신을 배치하시겠습니까?
+아니요
+VM 삭제 시 NIC 삭제
+사용 안 함
+관리
+클라우드용 Microsoft Defender
+표준
+시스템이 할당한 관리 ID
+끄기
+Microsoft Entra ID로 로그인
+끄기
+자동 종료
+끄기
+정기적인 평가 사용
+끄기
+핫패치 사용
+끄기
+패치 오케스트레이션 옵션
+이미지 기본값
+모니터링
+경고
+끄기
+부트 진단
+켜기
+OS 게스트 진단 사용
+끄기
+애플리케이션 상태 모니터링 사용
+끄기
+고급
+확장
+없음
+VM 애플리케이션
+없음
+Cloud-Init
+아니요
+사용자 데이터
+아니요
+디스크 컨트롤러 유형
+SCSI
+근접 배치 그룹
+없음
+용량 예약 그룹
+없음
+태그
+Environment
+dev(가상 네트워크)
+Service
+ag015703(가상 네트워크)
+ServiceGrade
+C(가상 네트워크)
+Name
+vm-az01-dev-migt-jumpbox-01(가상 네트워크)
+ProvisionedBy
+NotTerraform(가상 네트워크)
+OS
+Rocky(가상 네트워크)
+Environment
+dev(가상 머신)
+Service
+ag015703(가상 머신)
+ServiceGrade
+C(가상 머신)
+Name
+vm-az01-dev-migt-jumpbox-01(가상 머신)
+ProvisionedBy
+NotTerraform(가상 머신)
+OS
+Rocky(가상 머신)
+Environment
+dev(가상 머신 확장)
+Service
+ag015703(가상 머신 확장)
+ServiceGrade
+C(가상 머신 확장)
+Name
+vm-az01-dev-migt-jumpbox-01(가상 머신 확장)
+ProvisionedBy
+NotTerraform(가상 머신 확장)
+OS
+Rocky(가상 머신 확장)
+Environment
+dev(가용성 집합)
+Service
+ag015703(가용성 집합)
+ServiceGrade
+C(가용성 집합)
+Name
+vm-az01-dev-migt-jumpbox-01(가용성 집합)
+ProvisionedBy
+NotTerraform(가용성 집합)
+OS
+Rocky(가용성 집합)
+Environment
+dev(공용 IP 주소)
+Service
+ag015703(공용 IP 주소)
+ServiceGrade
+C(공용 IP 주소)
+Name
+vm-az01-dev-migt-jumpbox-01(공용 IP 주소)
+ProvisionedBy
+NotTerraform(공용 IP 주소)
+OS
+Rocky(공용 IP 주소)
+Environment
+dev(네트워크 보안 그룹)
+Service
+ag015703(네트워크 보안 그룹)
+ServiceGrade
+C(네트워크 보안 그룹)
+Name
+vm-az01-dev-migt-jumpbox-01(네트워크 보안 그룹)
+ProvisionedBy
+NotTerraform(네트워크 보안 그룹)
+OS
+Rocky(네트워크 보안 그룹)
+Environment
+dev(네트워크 인터페이스)
+Service
+ag015703(네트워크 인터페이스)
+ServiceGrade
+C(네트워크 인터페이스)
+Name
+vm-az01-dev-migt-jumpbox-01(네트워크 인터페이스)
+ProvisionedBy
+NotTerraform(네트워크 인터페이스)
+OS
+Rocky(네트워크 인터페이스)
+Environment
+dev(디스크)
+Service
+ag015703(디스크)
+ServiceGrade
+C(디스크)
+Name
+vm-az01-dev-migt-jumpbox-01(디스크)
+ProvisionedBy
+NotTerraform(디스크)
+OS
+Rocky(디스크)
+Environment
+dev(스토리지 계정)
+Service
+ag015703(스토리지 계정)
+ServiceGrade
+C(스토리지 계정)
+Name
+vm-az01-dev-migt-jumpbox-01(스토리지 계정)
+ProvisionedBy
+NotTerraform(스토리지 계정)
+OS
+Rocky(스토리지 계정)
+Environment
+dev(자동 종료 일정)
+Service
+ag015703(자동 종료 일정)
+ServiceGrade
+C(자동 종료 일정)
+Name
+vm-az01-dev-migt-jumpbox-01(자동 종료 일정)
+ProvisionedBy
+NotTerraform(자동 종료 일정)
+OS
+Rocky(자동 종료 일정)
+Environment
+dev(Recovery Services 자격 증명 모음)
+Service
+ag015703(Recovery Services 자격 증명 모음)
+ServiceGrade
+C(Recovery Services 자격 증명 모음)
+Name
+vm-az01-dev-migt-jumpbox-01(Recovery Services 자격 증명 모음)
+ProvisionedBy
+NotTerraform(Recovery Services 자격 증명 모음)
+OS
+Rocky(Recovery Services 자격 증명 모음)
+Environment
+dev(SQL 가상 머신)
+Service
+ag015703(SQL 가상 머신)
+ServiceGrade
+C(SQL 가상 머신)
+Name
+vm-az01-dev-migt-jumpbox-01(SQL 가상 머신)
+ProvisionedBy
+NotTerraform(SQL 가상 머신)
+OS
+Rocky(SQL 가상 머신)
+Environment
+dev(SSH 키)
+Service
+ag015703(SSH 키)
+ServiceGrade
+C(SSH 키)
+Name
+vm-az01-dev-migt-jumpbox-01(SSH 키)
+ProvisionedBy
+NotTerraform(SSH 키)
+OS
+Rocky(SSH 키)

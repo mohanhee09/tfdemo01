@@ -1,0 +1,222 @@
+[WAF 정책]
+기본
+구독
+sub-az01-co013701-stg-magma
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+지역
+Korea Central
+Application Gateway Web Application Firewall Policies_wafp_az01_azsec_01_name
+wafp01-az01-stg-magma-private-wandb-01
+
+[NSG]
+기본 사항
+구독
+sub-az01-co013701-stg-magma
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+지역
+Korea Central
+이름
+nsg-az01-stg-magma-appgw-private-wandb-01
+태그
+Environment
+stg
+Name
+nsg-az01-stg-magma-appgw-private-wandb-01
+ProvisionedBy
+NotTerraform
+Service
+CO013701
+ServiceGrade
+C
+
+[UDR]
+Basics
+Subscription
+sub-az01-co013701-stg-magma
+Resource group
+rg-az01-co013701-stg-magma-wandb-01
+Name
+udr-az01-stg-magma-appgw-private-wandb-01
+Region
+Korea Central
+Propagate gateway routes
+Yes
+Tags
+Tags
+Environment: stg, Name: udr-az01-stg-magma-appgw-private-wandb-01, ProvisionedBy: NotTerraform, Service: CO013701, ServiceGrade: C
+
+[APPGW]
+기본 사항
+구독
+sub-az01-co013701-stg-magma
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+이름
+appgw-az01-stg-magma-private-wandb-01
+지역
+Korea Central
+계층
+WAF_v2
+자동 크기 조정
+사용
+최소 인스턴스 수
+0
+최대 인스턴스 수
+10
+WAF 상태
+사용
+WAF 모드
+Detection
+가용성 영역
+영역 1, 2, 3
+HTTP2
+사용 안 함
+FIPS(Federal Information Processing Standard) 모드 140-2
+사용 안 함
+가상 네트워크
+vnet-az01-stg-magma-01
+서브넷
+sbn-az01-stg-magma-appgw-private-wandb-01(10.243.235.0/26)
+웹 애플리케이션 방화벽
+wafp01-az01-stg-magma-private-wandb-01
+프런트 엔드
+공용 IPv4 주소 이름
+pip-az01-stg-magma-private-wandb-01
+SKU
+Standard
+할당
+Static
+가용성 영역
+ZoneRedundant
+프라이빗 IPv4 주소
+10.243.235.62
+태그
+Environment
+stg
+Name
+appgw-az01-stg-magma-private-wandb-01
+ProvisionedBy
+NotTerraform
+Service
+CO013701
+ServiceGrade
+C
+
+[UMI]
+Basics
+구독
+sub-az01-co013701-stg-magma
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+이름
+umi-az01-stg-magma-appgw-private-wandb-01
+지역
+Korea Central
+격리 범위
+없음
+Tags
+Environment
+stg (관리 ID)
+Name
+umi-az01-stg-magma-appgw-private-wandb-01 (관리 ID)
+ProvisionedBy
+NotTerraform (관리 ID)
+Service
+CO013701 (관리 ID)
+ServiceGrade
+C (관리 ID)
+
+[KeyVault]
+기본
+구독
+sub-az01-co013701-stg-magma
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+주요 자격 증명 모음 이름
+kv-az01-stg-magma-wandb1
+지역
+Korea Central
+가격 책정 계층
+Premium
+일시 삭제
+사용
+보존 기간 동안 제거 보호
+사용
+삭제된 자격 증명 모음 보존 일 수
+90일
+액세스 구성
+배포를 위한 Azure Virtual Machines
+사용 안 함
+템플릿 배포를 위한 Azure Resource Manager
+사용 안 함
+볼륨 암호화를 위한 Azure Disk Encryption
+사용 안 함
+권한 모델
+Azure 역할 기반 액세스 제어
+네트워킹
+연결 방법
+프라이빗 엔드포인트
+태그
+Environment
+stg (키 자격 증명 모음)
+Name
+kv-az01-stg-magma-wandb1 (키 자격 증명 모음)
+ProvisionedBy
+NotTerraform (키 자격 증명 모음)
+Service
+CO013701 (키 자격 증명 모음)
+ServiceGrade
+C (키 자격 증명 모음)
+
+[Private Endpoints]
+기본 사항
+구독
+sub-az01-co013701-stg-magma
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+지역
+Korea Central
+이름
+pep-az01-stg-magma-kv-wandb-01
+네트워크 인터페이스 이름
+pep-az01-stg-magma-kv-wandb-01-nic
+리소스
+구독 ID
+eb734b1b-c40b-4a1e-b8db-9219f3f41abd (sub-az01-co013701-stg-magma)
+링크 유형
+Microsoft.KeyVault/vaults
+리소스 그룹
+rg-az01-co013701-stg-magma-wandb-01
+리소스
+kv-az01-stg-magma-wandb1
+대상 하위 리소스
+vault
+가상 네트워크
+가상 네트워크 리소스 그룹
+rg-az01-co013701-stg-magma-01
+가상 네트워크
+vnet-az01-stg-magma-01
+서브넷
+sbn-az01-stg-magma-pl-wandb-01(10.243.236.192/28)
+네트워크 정책
+경로 테이블
+애플리케이션 보안 그룹
+없음
+DNS
+프라이빗 DNS 영역과 통합하시겠습니까?
+아니요
+개인 IP 정적으로 할당
+아니요
+태그
+Environment
+stg (Microsoft.Network/privateEndpoints)
+Name
+pep-az01-stg-magma-kv-wandb-01 (Microsoft.Network/privateEndpoints)
+ProvisionedBy
+NotTerraform (Microsoft.Network/privateEndpoints)
+Service
+CO013701 (Microsoft.Network/privateEndpoints)
+ServiceGrade
+C (Microsoft.Network/privateEndpoints)

@@ -104,7 +104,7 @@ az aks create `
  --location $LOCATION `
  --enable-private-cluster `
  --kubernetes-version $KUBE_VERSION `
- --max-pods $MAX_PODS `
+ --max-pods $MAX_PODS `2
  --node-count $NODE_COUNT `
  --network-plugin azure `
  --network-plugin-mode overlay `
@@ -145,6 +145,7 @@ az aks approuting enable --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_N
 # app routing patch / Run Command 에서 실행 (internal ip 바인딩)
 kubectl patch service nginx -n app-routing-system -p '{"metadata": {"annotations": {"service.beta.kubernetes.io/azure-load-balancer-internal": "true"}}}'
 
+az aks show --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME --query "storageProfile.blobCsiDriver.enabled" --output tsv    
 
 # ✅ Blob CSI Driver 설치
   az aks update --enable-blob-driver --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME
